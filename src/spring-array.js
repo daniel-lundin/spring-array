@@ -26,8 +26,7 @@ export function springTween(config) {
   const friction = config.friction || 1;
   let velocity = config.initialVelocity || 0;
 
-  const from = config.from;
-  const to = config.to;
+  const { from, to } = config;
   const output = deepClone(config.from);
 
   let tweenValue = 0;
@@ -65,11 +64,9 @@ export function tween(config) { // eslint-disable-line consistent-return
 
   const rAF = window.requestAnimationFrame;
 
-  const easer = config.easing;
+  const { from, to, easer } = config;
   const duration = config.duration || 500;
 
-  const from = config.from;
-  const to = config.to;
   const output = deepClone(config.from);
 
   let currentTime = null;
