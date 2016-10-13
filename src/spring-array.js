@@ -2,7 +2,8 @@ export function tweenArray(from, to, output, tweenValue) {
   from.forEach((value, i) => {
     if (Array.isArray(value)) {
       tweenArray(value, to[i], output[i], tweenValue);
-    } else {
+    }
+    else {
       output[i] = value + (to[i] - value) * tweenValue; // eslint-disable-line
     }
   });
@@ -44,7 +45,9 @@ export function springTween(config) {
     if (Math.abs(tweenValue - 1) < 0.001 && Math.abs(velocity) < 0.001) {
       tweenArray(from, to, output, 1);
       config.update(to);
-      if (config.done) config.done();
+      if (config.done) {
+        config.done();
+      }
       return;
     }
 
@@ -81,7 +84,9 @@ export function tween(config) { // eslint-disable-line consistent-return
     if (time - currentTime >= duration) {
       tweenArray(from, to, output, 1);
       config.update(to);
-      if (config.done) config.done();
+      if (config.done) {
+        config.done();
+      }
       return;
     }
 
