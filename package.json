@@ -1,8 +1,9 @@
 {
   "name": "spring-array",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Array tweener with built-in spring",
   "main": "lib/index.js",
+  "module": "src/index.js",
   "scripts": {
     "test": "mocha --recursive --require babel-core/register --require ./test-setup.js 'src/**/*-tests.js'",
     "test:watch": "npm run test -- --watch",
