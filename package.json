@@ -8,7 +8,8 @@
     "test": "mocha --recursive --require babel-core/register --require ./test-setup.js 'src/**/*-tests.js'",
     "test:watch": "npm run test -- --watch",
     "lint": "eslint src/",
-    "build": "babel src/ --out-dir lib/"
+    "build": "babel src/ --out-dir lib/",
+    "gh-pages": "md2ghp"
   },
   "author": "Daniel Lundin <d-dog@d-dog.se>",
   "license": "ISC",
@@ -23,10 +24,14 @@
     "dirty-chai": "^1.2.2",
     "eslint": "^3.7.1",
     "eslint-plugin-babel": "^3.3.0",
+    "md2ghp": "0.0.6",
     "mocha": "^2.4.5",
     "sinon": "^1.17.4",
     "sinon-chai": "^2.8.0",
     "webpack": "^1.13.0"
   },
-  "files": ["lib/", "src/"]
+  "files": [
+    "lib/",
+    "src/"
+  ]
 }
