@@ -1,7 +1,7 @@
 # spring-array
 
 Micro library for tweening arrays(or array of arrays). Built-in spring easing.
-Useful for animation svg paths.
+Useful for animating svg paths.
 
 ## Usage
 
