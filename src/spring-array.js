@@ -2,15 +2,14 @@ export function tweenArray(from, to, output, tweenValue) {
   from.forEach((value, i) => {
     if (Array.isArray(value)) {
       tweenArray(value, to[i], output[i], tweenValue);
-    }
-    else {
+    } else {
       output[i] = value + (to[i] - value) * tweenValue; // eslint-disable-line
     }
   });
 }
 
 function deepClone(sequence) {
-  return sequence.map((item) => {
+  return sequence.map(item => {
     if (Array.isArray(item)) {
       return deepClone(item);
     }
@@ -18,9 +17,7 @@ function deepClone(sequence) {
   });
 }
 
-export function springTween(config) {
-  const rAF = window.requestAnimationFrame;
-
+export function springTween(config, rAF) {
   const tension = config.tension || 0.8;
   const deceleration = config.deceleration || 0.8;
   const friction = config.friction || 1;
@@ -57,12 +54,22 @@ export function springTween(config) {
   rAF(tick);
 }
 
-export function tween(config) { // eslint-disable-line consistent-return
-  if (!config.easing) {
-    return springTween(config);
-  }
+export function tween(config) {
+  // eslint-disable-line consistent-return
+  const stopper = { stopped: false };
+  const showStopper = () => {
+    stopper.stopped = true;
+  };
+  const rAF = cb => {
+    if (!stopper.stopped) {
+      window.requestAnimationFrame(cb);
+    }
+  };
 
-  const rAF = window.requestAnimationFrame;
+  if (!config.easing) {
+    springTween(config, rAF);
+    return showStopper;
+  }
 
   const { from, to, easer } = config;
   const duration = config.duration || 500;

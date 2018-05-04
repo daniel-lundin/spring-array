@@ -1,7 +1,8 @@
-import { tweenArray } from './spring-array.js';
+/* global describe, it, expect */
+import { tweenArray } from "./spring-array.js";
 
-describe('#tweenArray', () => {
-  it('should update output with the tweened value', () => {
+describe("#tweenArray", () => {
+  it("should update output with the tweened value", () => {
     const output = [0, 0, 0];
     const from = [0, 0, 0];
     const to = [1, 1, 1];
@@ -11,7 +12,7 @@ describe('#tweenArray', () => {
     expect(output).to.eql([0.5, 0.5, 0.5]);
   });
 
-  it('should handle array of arrays', () => {
+  it("should handle array of arrays", () => {
     const output = [[0, 0], [0, 0]];
     const from = [[0, 0], [0, 0]];
     const to = [[1, 1], [1, 1]];
@@ -21,7 +22,7 @@ describe('#tweenArray', () => {
     expect(output).to.eql([[0.5, 0.5], [0.5, 0.5]]);
   });
 
-  it('should handle array of array of arrays', () => {
+  it("should handle array of array of arrays", () => {
     const output = [[[0, 0]], [[0, 0]]];
     const from = [[[0, 0]], [[0, 0]]];
     const to = [[[1, 1]], [[1, 1]]];
