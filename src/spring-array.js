@@ -66,7 +66,7 @@ export function tween(config) {
     }
   };
 
-  if (!config.easing) {
+  if (!config.easer) {
     springTween(config, rAF);
     return showStopper;
   }
@@ -100,4 +100,5 @@ export function tween(config) {
   }
 
   rAF(tick);
+  return showStopper;
 }
