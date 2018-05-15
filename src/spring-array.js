@@ -29,6 +29,8 @@ export function springTween(config, rAF) {
   let tweenValue = 0;
 
   const tick = () => {
+    if (rAF.isStopped()) return;
+
     const diff = 1 - tweenValue;
     const force = diff * tension;
     const acc = force * friction;
@@ -65,6 +67,7 @@ export function tween(config) {
       window.requestAnimationFrame(cb);
     }
   };
+  rAF.isStopped = () => stopper.stopped;
 
   if (!config.easer) {
     springTween(config, rAF);
@@ -79,6 +82,8 @@ export function tween(config) {
   let currentTime = null;
 
   function tick(time) {
+    if (rAF.isStopped()) return;
+
     if (!currentTime) {
       currentTime = time;
     }
