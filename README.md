@@ -16,7 +16,6 @@ const stopper = tween({
   to,
   update: (value) => { // Called on every frame with current value }
   done: () => { // Called upon completetion },
-  easer: (i) => i, // Optional custom easing function
   // Spring config (optional, defaults show below)
   deceleration: 0.8,
   tension: 0.8,

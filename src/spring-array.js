@@ -68,42 +68,6 @@ export function tween(config) {
     }
   };
   rAF.isStopped = () => stopper.stopped;
-
-  if (!config.easer) {
-    springTween(config, rAF);
-    return showStopper;
-  }
-
-  const { from, to, easer } = config;
-  const duration = config.duration || 500;
-
-  const output = deepClone(config.from);
-
-  let currentTime = null;
-
-  function tick(time) {
-    if (rAF.isStopped()) return;
-
-    if (!currentTime) {
-      currentTime = time;
-    }
-    const normalizedTime = (time - currentTime) / duration;
-    const tweenValue = easer(normalizedTime);
-
-    if (time - currentTime >= duration) {
-      tweenArray(from, to, output, 1);
-      config.update(to);
-      if (config.done) {
-        config.done();
-      }
-      return;
-    }
-
-    tweenArray(from, to, output, tweenValue);
-    config.update(output);
-    rAF(tick);
-  }
-
-  rAF(tick);
+  springTween(config, rAF);
   return showStopper;
 }
