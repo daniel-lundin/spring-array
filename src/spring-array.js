@@ -18,10 +18,10 @@ function deepClone(sequence) {
 }
 
 export function springTween(config, rAF) {
-  const tension = config.tension || 0.8;
-  const deceleration = config.deceleration || 0.8;
-  const friction = config.friction || 1;
-  let velocity = config.initialVelocity || 0;
+  const stiffness = config.stiffness || 10;
+  const damping = config.damping || 0.5;
+  const noOvershoot = !!config.noOvershoot;
+  let velocity = config.velocity || 0;
 
   const { from, to } = config;
   const output = deepClone(config.from);
@@ -32,13 +32,15 @@ export function springTween(config, rAF) {
     if (rAF.isStopped()) return;
 
     const diff = 1 - tweenValue;
-    const force = diff * tension;
-    const acc = force * friction;
+    const acceleration = diff * (stiffness / 100) - velocity * damping;
 
-    velocity += acc;
-    velocity *= deceleration;
-
+    velocity += acceleration;
     tweenValue += velocity;
+
+    if (noOvershoot && tweenValue > 1) {
+      velocity *= -1;
+      tweenValue = 1 - (tweenValue - 1);
+    }
 
     if (Math.abs(tweenValue - 1) < 0.001 && Math.abs(velocity) < 0.001) {
       tweenArray(from, to, output, 1);
